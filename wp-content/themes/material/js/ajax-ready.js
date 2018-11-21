@@ -1,7 +1,7 @@
 (function( $ ){
 
-    if ( $(".slider").length ) {
-        $(".slider").slick();
+    if ( $(".text-slider").length ) {
+        $(".text-slider").slick();
     } 
     
 })( jQuery );

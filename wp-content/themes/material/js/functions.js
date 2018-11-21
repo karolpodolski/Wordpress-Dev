@@ -5,6 +5,6 @@
 
 
 
-    $(".slider").slick();
+    $(".text-slider").slick();
     
     })( jQuery );

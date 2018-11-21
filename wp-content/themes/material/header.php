@@ -15,6 +15,8 @@
 </head>
 <body <?php body_class(); ?>>
     
+<div class="loader"></div>
+    
 <div class="mdl-layout mdl-js-layout">
     <div class="progress"></div>
     <header class="mdl-layout__header <?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo 'transparent'; } ?>">

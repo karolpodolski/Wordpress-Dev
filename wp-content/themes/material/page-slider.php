@@ -10,12 +10,13 @@
                 
                 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-                    <br><br><br><br>
+                    <br><br><br><br><br><br><br><br>
                 
-                        <div class="slider">
-                            <div>slide1</div>
-                            <div>slide2</div>
-                            <div>slide3</div>
+                        <div class="text-slider">
+                            <div><img src="<?php echo get_template_directory_uri(); ?>/img/slide1.jpg"></div>
+                            <div><img src="<?php echo get_template_directory_uri(); ?>/img/slide2.jpg"></div>
+                            <div><img src="<?php echo get_template_directory_uri(); ?>/img/slide1.jpg"></div>
+                            <div><img src="<?php echo get_template_directory_uri(); ?>/img/slide2.jpg"></div>
                         </div>
                 
                     <br><br><br><br>

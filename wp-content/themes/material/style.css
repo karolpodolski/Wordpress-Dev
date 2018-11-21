@@ -8,6 +8,8 @@ a:hover {text-decoration:none; color:inherit;}
 .progress {display: block; text-align: center; width: 0; height: 5px; background: red; transition: all .3s; -webkit-transition: all .3s; position: fixed; z-index: 999;}
 .progress.hide {opacity: 0; transition: opacity .5s;}
 
+.loader {display: none; position: fixed; top: 50%; width: 200px; height: 200px; background: url(img/loader.gif) center no-repeat; left: 50%; transform: translate(-50%,-50%); -webkit-transform: translate(-50%,-50%); background-size:50%; z-index:99;}
+
 /* Header */
 
 .mdl-layout {position:relative;}
@@ -41,6 +43,8 @@ a:hover {text-decoration:none; color:inherit;}
 .index-slider h1 {color:#fff; font-weight:100;}
 .index-slider .centered {display:flex; text-align:center; align-items: center; justify-content: center; height:100%; color:#fff;}
 .index-slider .lead {}
+
+.text-slider img {width:100%; height:auto;}
 
 .entry-content {}
 

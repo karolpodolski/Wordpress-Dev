@@ -28,7 +28,8 @@
 
                 <?php endwhile; endif; ?>
 
-            </section>  
+            </section> 
+            
         </div>
         <div class="mdl-cell mdl-cell--2-col"></div>
     </div>

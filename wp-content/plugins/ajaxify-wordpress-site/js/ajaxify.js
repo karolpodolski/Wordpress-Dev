@@ -92,18 +92,10 @@
 
 			// Set Loading
 			$body.addClass('loading');
-			
-			// Start Fade Out
-			// Animating to opacity to 0 still keeps the element's height intact
-			// Which prevents that annoying pop bang issue when loading in new content
-			
-//			if ( '' != aws_data['transition'] ) {
-//				//$content.animate({opacity:0},800);
-//			}
-            
+            $(".loader").fadeIn();
             $content.addClass("hide");
             
-            //Add loader ...
+            //Add loader
             var data = [];
             for (var i = 0; i < 100000; i++) {
                 var tmp = [];
@@ -167,14 +159,11 @@
 						return false;
 					}
                     
-                    $content.find(".slider").css("color","red");
-
-					// Update the content
 					$content.stop(true,true);
                     
                     setTimeout(function(){
                         $content.html(contentHtml).ajaxify().removeClass("hide");
-                        //$(".progress").css("width","0").css("right","0").removeClass("hide");
+                        $(".loader").fadeOut();
                         $(".progress").css("width","0");
                         setTimeout(function(){
                             $(".progress").removeClass("hide");
@@ -185,10 +174,8 @@
                        scrollTop: jQuery(contentSelector).offset().top
                     }, 400);
 					
-					//Append new menu HTML to provided classs
 					$('.' + aws_data['mcdc']).html($menu_list.html());
 					$body.ajaxify();
-					//Adding no-ajaxy class to a tags present under ids provided
 					$(aws_data['ids']).each(function(){
 						jQuery(this).addClass('no-ajaxy');
 					});
@@ -196,9 +183,7 @@
 					// Update the title
 					document.title = $data.find('#document-title:first').text();
 					try {
-						document.getElementsByTagName('title')[0].innerHTML = document.title.replace('<','&lt;')
-																							.replace('>','&gt;')
-																							.replace(' & ',' &amp; ');
+						document.getElementsByTagName('title')[0].innerHTML = document.title.replace('<','&lt;').replace('>','&gt;').replace(' & ',' &amp; ');
 					}
 					catch ( Exception ) { }
 
@@ -219,8 +204,6 @@
 					if ( aws_data['bp_status'] ) {
 						$.getScript(rootUrl + '/wp-content/plugins/buddypress/bp-templates/bp-legacy/js/buddypress.js');
 					}
-                    
-                    //$.getScript(rootUrl + '/wp-content/themes/material/js/functions.js');
                     
 					$body.removeClass('loading');
 
