@@ -85,3 +85,83 @@ function blankslate_comments_number( $count )
         return $count;
     }
 }
+
+/* paginacja */
+function numeric_posts_nav() {
+ 
+    if( is_singular() )
+        return;
+ 
+    global $wp_query;
+ 
+    if( $wp_query->max_num_pages <= 1 )
+        return;
+ 
+    $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $max   = intval( $wp_query->max_num_pages );
+ 
+    if ( $paged >= 1 )
+        $links[] = $paged;
+    
+    if ( $paged >= 3 ) {
+        $links[] = $paged - 1;
+        $links[] = $paged - 2;
+    }
+ 
+    if ( ( $paged + 2 ) <= $max ) {
+        $links[] = $paged + 2;
+        $links[] = $paged + 1;
+    }
+ 
+    echo '<div class="navigation"><ul>' . "\n";
+ 
+    if ( get_previous_posts_link() )
+        printf( '<li class="prev-next">%s</li>' . "\n", get_previous_posts_link() );
+ 
+    if ( ! in_array( 1, $links ) ) {
+        $class = 1 == $paged ? ' class="active"' : '';
+ 
+        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
+ 
+        if ( ! in_array( 2, $links ) )
+            echo '<li><span> … </span></li>';
+    }
+ 
+    sort( $links );
+    foreach ( (array) $links as $link ) {
+        $class = $paged == $link ? ' class="active"' : '';
+        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
+    }
+ 
+    if ( ! in_array( $max, $links ) ) {
+        if ( ! in_array( $max - 1, $links ) )
+            echo '<li><span> … </span></li>' . "\n";
+ 
+        $class = $paged == $max ? ' class="active"' : '';
+        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
+    }
+ 
+    if ( get_next_posts_link() )
+        printf( '<li class="prev-next">%s</li>' . "\n", get_next_posts_link() );
+ 
+    echo '</ul></div>' . "\n";
+ 
+}
+
+/* sortowanie po acf */
+function wpse28145_add_custom_types( $query ) {
+    if( is_tag() && $query->is_main_query() ) {
+        $post_types = get_post_types();
+        $query->set( 'post_type', $post_types );
+    }
+    if( is_admin() ) {
+		return $query;
+	}
+//	if( isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'baza-firm' ) {
+//		$query->set('orderby', 'meta_value');	
+//		$query->set('meta_key', 'featured');	 
+//		$query->set('order', 'DESC'); 
+//	}
+	return $query;
+}
+add_filter( 'pre_get_posts', 'wpse28145_add_custom_types' );
